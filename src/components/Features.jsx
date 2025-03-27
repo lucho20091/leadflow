@@ -1,64 +1,96 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+
+const features = [
+  {
+    title: 'Drag & Drop Builder',
+    description: 'Create beautiful landing pages with our intuitive drag-and-drop interface. No coding required.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h16M4 16h16" />
+      </svg>
+    )
+  },
+  {
+    title: 'Responsive Design',
+    description: 'Your landing pages will look great on all devices, from mobile to desktop.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+      </svg>
+    )
+  },
+  {
+    title: 'Analytics & Insights',
+    description: 'Track your landing page performance with built-in analytics and conversion tracking.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    )
+  }
+]
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+}
 
 const Features = () => {
   return (
     <section id="features" className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            Why Choose Us
+            Powerful Features
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            We combine cutting-edge design with proven conversion strategies to create landing pages that drive results.
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            Everything you need to create stunning landing pages that convert visitors into customers.
           </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Feature 1 */}
-          <div className="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors duration-300">
-              <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 group-hover:text-primary-600 transition-colors duration-300">
-              Lightning Fast
-            </h3>
-            <p className="text-base text-gray-600 leading-relaxed">
-              Get your landing page up and running in minutes, not hours. Our streamlined process ensures quick delivery without compromising quality.
-            </p>
-          </div>
+        </motion.div>
 
-          {/* Feature 2 */}
-          <div className="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors duration-300">
-              <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 group-hover:text-primary-600 transition-colors duration-300">
-              Mobile First
-            </h3>
-            <p className="text-base text-gray-600 leading-relaxed">
-              Every landing page is designed with mobile users in mind first, ensuring a perfect experience across all devices.
-            </p>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors duration-300">
-              <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 group-hover:text-primary-600 transition-colors duration-300">
-              Conversion Focused
-            </h3>
-            <p className="text-base text-gray-600 leading-relaxed">
-              Our designs are optimized for conversions, using proven strategies to turn visitors into customers.
-            </p>
-          </div>
-        </div>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={item}
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 hover:shadow-lg transition-shadow duration-200"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 mb-6">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

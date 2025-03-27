@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 const Pricing = () => {
   const plans = [
@@ -46,33 +47,73 @@ const Pricing = () => {
     }
   ]
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  }
+
+  const handlePlanSelect = (plan) => {
+    const message = `Hello there, I'm interested in the ${plan.price} plan (${plan.name}), can you please give me more information?`
+    localStorage.setItem('contactMessage', message)
+    window.location.href = '#contact'
+    window.location.reload();
+  }
+
   return (
     <section id="pricing" className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
             Simple, Transparent Pricing
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Choose the perfect plan for your business needs. All plans include our core features.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {plans.map((plan, index) => (
-            <div 
+            <motion.div 
               key={index}
+              variants={item}
+              whileHover={{ y: -5 }}
               className={`bg-white rounded-2xl shadow-soft p-8 flex flex-col ${
                 plan.popular ? 'border-2 border-primary-600' : ''
               }`}
             >
               <div>
                 {plan.popular && (
-                  <div className="mb-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-4"
+                  >
                     <span className="bg-primary-100 text-primary-600 px-3 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
-                  </div>
+                  </motion.div>
                 )}
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">{plan.name}</h3>
                 <p className="text-gray-600 mb-6">{plan.description}</p>
@@ -82,23 +123,35 @@ const Pricing = () => {
                 </div>
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-600">
+                    <motion.li
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="flex items-center text-gray-600"
+                    >
                       <svg className="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
               <div className="mt-auto">
-                <button className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handlePlanSelect(plan)}
+                  className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-200"
+                >
                   Choose Plan
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

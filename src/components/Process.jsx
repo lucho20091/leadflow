@@ -1,81 +1,102 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+
+const steps = [
+  {
+    number: '01',
+    title: 'Choose a Template',
+    description: 'Browse our collection of professionally designed templates and choose the one that best fits your needs.'
+  },
+  {
+    number: '02',
+    title: 'Customize Your Page',
+    description: 'Use our intuitive drag-and-drop builder to customize your landing page with your content and branding.'
+  },
+  {
+    number: '03',
+    title: 'Launch & Track',
+    description: 'Publish your landing page and track its performance with our built-in analytics tools.'
+  }
+]
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+}
 
 const Process = () => {
-  const steps = [
-    {
-      number: "01",
-      title: "Tell us about your business",
-      description: "Share your vision, target audience, and goals with us through a simple consultation process.",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-        </svg>
-      )
-    },
-    {
-      number: "02",
-      title: "We design your landing page",
-      description: "Our team creates a custom design that matches your brand and optimizes for conversion.",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-        </svg>
-      )
-    },
-    {
-      number: "03",
-      title: "Launch and start converting",
-      description: "Get your landing page live and start seeing results with our proven conversion strategies.",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      )
-    }
-  ]
-
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+    <section id="process" className="py-16 sm:py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
             How It Works
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Our simple three-step process makes it easy to get your landing page up and running
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            Create your landing page in three simple steps
           </p>
-        </div>
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-indigo-100 transform -translate-y-1/2"></div>
-          
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="relative"
+        >
+          {/* Connecting Line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="absolute top-8 left-0 w-full h-0.5 bg-primary-200 hidden md:block"
+          />
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {steps.map((step, index) => (
-              <div 
-                key={index} 
-                className="relative bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+              <motion.div
+                key={index}
+                variants={item}
+                className="relative"
               >
-                {/* Step number circle */}
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                  {step.number}
+                <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 200, delay: index * 0.2 }}
+                    className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 font-bold mb-4"
+                  >
+                    {step.number}
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {step.description}
+                  </p>
                 </div>
-                
-                {/* Icon */}
-                <div className="w-16 h-16 bg-indigo-50 rounded-lg flex items-center justify-center mb-6 mx-auto">
-                  <div className="text-indigo-600">
-                    {step.icon}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
