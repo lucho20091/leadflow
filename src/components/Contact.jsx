@@ -16,7 +16,6 @@ const Contact = ({ amount }) => {
 
   useEffect(() => {
     if (amount > 0) {
-      console.log(amount)
       setFormData({
         ...formData,
         message: `Hello there, I'm interested in the $${amount} plan, can you please give me more information?`
