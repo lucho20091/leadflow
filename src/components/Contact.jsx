@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useForm, ValidationError } from '@formspree/react'
 import { motion } from 'framer-motion'
 
-const Contact = () => {
+const Contact = ({ amount }) => {
   const [state, handleSubmit] = useForm("mrbpabeq", {
     data: {
       subject: "New Contact Form Submission"
@@ -15,12 +15,14 @@ const Contact = () => {
   })
 
   useEffect(() => {
-    const savedMessage = localStorage.getItem('contactMessage')
-    if (savedMessage) {
-      console.log(savedMessage)
-      setFormData(prev => ({ ...prev, message: savedMessage }))
+    if (amount > 0) {
+      console.log(amount)
+      setFormData({
+        ...formData,
+        message: `Hello there, I'm interested in the $${amount} plan, can you please give me more information?`
+      })
     }
-  }, [])
+  }, [amount])
 
   const handleChange = (e) => {
     setFormData({

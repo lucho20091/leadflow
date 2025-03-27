@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -10,6 +10,14 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
+  const [amount, setAmount] = useState(0)
+
+  function handleAmountChange(newAmount) {
+    setAmount(newAmount)
+  }
+
+  console.log(amount)
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -18,8 +26,8 @@ function App() {
         <Features />
         <Examples />
         <Process />
-        <Pricing />
-        <Contact />
+        <Pricing handleAmountChange={handleAmountChange}/>
+        <Contact amount={amount}/>
       </main>
       <Footer />
     </div>

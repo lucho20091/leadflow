@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-const Pricing = () => {
+const Pricing = ({ handleAmountChange }) => {
   const plans = [
     {
       name: "Basic",
@@ -63,10 +63,9 @@ const Pricing = () => {
   }
 
   const handlePlanSelect = (plan) => {
-    const message = `Hello there, I'm interested in the ${plan.price} plan (${plan.name}), can you please give me more information?`
-    localStorage.setItem('contactMessage', message)
+    const amount = parseInt(plan.price.replace('$', ''), 10)
+    handleAmountChange(amount)
     window.location.href = '#contact'
-    window.location.reload();
   }
 
   return (
