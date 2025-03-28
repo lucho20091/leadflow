@@ -16,8 +16,6 @@ function App() {
     setAmount(newAmount)
   }
 
-  console.log(amount)
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
